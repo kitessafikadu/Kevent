@@ -15,7 +15,7 @@ func (app *application) createEvent (c *gin.Context){
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	err:= app.models.Events.insert(&event)
+	err := app.models.Events.Insert(&event)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create event"})
 		return
@@ -24,7 +24,7 @@ func (app *application) createEvent (c *gin.Context){
 }
 
 func (app *application) getAllEvents(c *gin.Context){
-	events, err:=app.models.Events.getAll()
+	events, err:=app.models.Events.GetAll()
 	if err != nil{
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve events"})
 		return
@@ -38,7 +38,7 @@ func (app *application) getEvent(c *gin.Context){
 	if err != nil{
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid event ID"})
 	}
-	event,err:= app.models.Events.get(id)
+	event,err:= app.models.Events.Get(id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Event not found"})
 	}
@@ -47,6 +47,7 @@ func (app *application) getEvent(c *gin.Context){
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve event"})
 	}
 	c.JSON(http.StatusOK, event)
+}
 
 	func (app *application) updateEvent(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
@@ -68,7 +69,7 @@ func (app *application) getEvent(c *gin.Context){
 		return
 	}
 
-	updatedEvent = &database.Event{}
+	updatedEvent := &database.Event{}
 	if err := c.ShouldBindJSON(updatedEvent); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
