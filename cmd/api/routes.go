@@ -16,6 +16,7 @@ func (app *application) routes() http.Handler {
 		v1.PUT("/events/:id", app.updateEvent)
 		v1.DELETE("/events/:id", app.deleteEvent)
 
+
 		v1.POST("/register", app.registerUser)
 	}
 	return g
