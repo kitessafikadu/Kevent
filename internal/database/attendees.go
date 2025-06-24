@@ -32,9 +32,9 @@ type Attendee struct {
 		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 		defer cancel()
 
-		query := "SELECT * FROM attendees where event_id=$1 AND user_id=$2"
+		query := "SELECT id, user_id, event_id FROM attendees WHERE event_id=$1 AND user_id=$2"
 		var attendee Attendee	
-		err := m.DB.QueryRowContext(ctx, query,eventId, UserId).Scan(&attendee.Id, &attendee.UserId, &attendee.EventId)
+		err := m.DB.QueryRowContext(ctx, query, eventId, UserId).Scan(&attendee.Id, &attendee.UserId, &attendee.EventId)
 		if err != nil{
 			if err == sql.ErrNoRows{
 				return nil, nil
