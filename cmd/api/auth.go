@@ -14,6 +14,10 @@ type registerRequest struct {
 	Name		string `json:"name" binding:"required,min=3"`
 }
 
+type loginRequest struct{
+	
+}
+
 func (app *application) registerUser(c *gin.Context){
 	var register registerRequest
 	if err := c.ShouldBindJSON(&register); err != nil {
