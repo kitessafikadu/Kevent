@@ -1,7 +1,7 @@
 package main
 
 import (
-	"rest-api-in-gin/internal/database"
+	"github.com/kitessafikadu/kevent/internal/database"
 
 	"github.com/gin-gonic/gin"
 )
